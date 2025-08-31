@@ -28,8 +28,9 @@
 .titulo {
   color: yellow;
   font-size: 1.8rem;
-  font-family: 'Press Start 2P', cursive, monospace;
+  font-family: 'MiFuentePersonalizada';
   text-shadow: 0 0 8px  blueviolet;
+  font-weight: 100;
 }
 
 /* Input */
@@ -60,7 +61,8 @@
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Press Start 2P', cursive, monospace;
+  font-family: 'MiFuentePersonalizada', cursive, monospace;
+  font-weight: 100;
 }
 .btn-start:hover {
   background: blueviolet;

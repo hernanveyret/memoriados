@@ -7,7 +7,7 @@ const Home = ({ barajarCartas, cartas, handleClick, puntos, player }) => {
     <div className="contenedor">
       <header>
         <section className="section-header">
-          <p>{player && player[0].toUpperCase() + player.slice(1)}</p>
+          <p>{player ? player[0].toUpperCase() + player.slice(1) : 'Jugador'}</p>
         </section>
         <section className="section-header">
           <img src='./img/nombre1.png' alt='' />
