@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import './home.css'
-const Home = ({ barajarCartas, cartas, handleClick, puntos }) => {
+const Home = ({ barajarCartas, cartas, handleClick, puntos, player }) => {
 
   return (
     <div className="contenedor">
       <header>
         <section className="section-header">
-          <p>NOMBRE</p>
+          <p>{player && player[0].toUpperCase() + player.slice(1)}</p>
         </section>
         <section className="section-header">
           <img src='./img/nombre1.png' alt='' />

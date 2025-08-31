@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import Home from './componentes/Home'
+import FormName from './componentes/FormName';
+import './App.css'
 
 function App() {
+const [ isHome, setIsHome ] = useState(false);
+const [ isFormName, setIsFormName ] = useState(true);
+
+const [ player, setPlayer ] = useState('')
 const [ cartas, setCartas ] = useState([])
 const [ puntos, setPuntos ] = useState(0)
 const [ letraUno, setLetraUno ] = useState(null)
 const [ letraDos, setLetraDos ] = useState(null)
 const [ targetUno, setTargetUno ] = useState(null)
 const [ targetDos, setTargetDos ] = useState(null)
+const [ aciertos, setAciertos ] = useState(0)
 const personajes = [
   {
     id: 'c',
@@ -114,6 +118,16 @@ const personajes = [
   }
 ];
 
+const startGame = (e) => {
+  const nombre = e.target.nombre.value;
+  setPlayer(nombre);
+  console.log('click')
+  e.preventDefault()
+  setIsFormName(false)
+  setIsHome(true)
+  barajarCartas()
+}
+// Baraja nuevamente las cartas y da vuelta las que estaban al revez
 const barajarCartas = () => {
   const cards = document.querySelectorAll('.card');
   cards.forEach(c => {
@@ -125,7 +139,8 @@ const barajarCartas = () => {
     let mazo = personajes.sort(() => Math.random() - 0.5 )
     setCartas(mazo)
   },1000)
-}
+};
+
 
 const handleClick = (target) => {
   let letraId = target.dataset.id;
@@ -135,6 +150,7 @@ const handleClick = (target) => {
   }else{
     setLetraDos(letraId);
     setTargetDos(target)
+  
   }
   
   //console.log(letraId)
@@ -144,35 +160,63 @@ const handleClick = (target) => {
 }
 
 useEffect(() => {
+  targetUno && console.log('id 1:',targetUno.id)
+  targetDos && console.log('id 2:',targetDos.id)
+}, [targetUno, targetDos])
+
+useEffect(() => {
   letraUno && console.log(letraUno);
   letraDos && console.log(letraDos)
 
   if(letraUno && letraDos){
-      if( letraUno === letraDos ){
-        console.log('coincidencia');
-        setLetraUno(null)
-        setLetraDos(null)
+    if(targetUno && targetDos ){
+      if(targetUno===targetDos){
+        console.log('hiciste click en la misma carta');
+        repetirCarta()
+        return
       }else{
-        console.log('No hay coincidencia')
-        setLetraUno(null)
-        setLetraDos(null)
-        setTimeout(() => {
-          targetUno.classList.remove('flip')
-          targetDos.classList.remove('flip')
-        }, 1500)
-        
-          }
+        if( letraUno === letraDos ){
+          console.log('coincidencia');
+          setLetraUno(null)
+          setLetraDos(null)
+          }else{
+          console.log('No hay coincidencia')
+          setLetraUno(null)
+          setLetraDos(null)
+          setTimeout(() => {
+            targetUno.classList.remove('flip')
+            targetDos.classList.remove('flip')
+          }, 1500);        
+        }
+      }
+    }
+      
   }
-},[letraUno, letraDos])
+},[letraUno, letraDos, targetUno, targetDos])
 
+const  repetirCarta = () => {
+    const audio = new Audio();
+    audio.src = "./audio/beeps.mp3";
+    audio.play();
+}
 return (
     <div className="conetendor-app">
-      <Home
+      {
+        isFormName && 
+        <FormName 
+        startGame={startGame}
+        />
+      }
+      {
+        isHome && 
+        <Home
         barajarCartas={barajarCartas}
         cartas={cartas}
         handleClick={handleClick}
         puntos={puntos}
+        player={player}
       />
+      }
     </div>
   )
 }
