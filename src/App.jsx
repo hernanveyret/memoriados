@@ -115,8 +115,16 @@ const personajes = [
 ];
 
 const barajarCartas = () => {
-  let mazo = personajes.sort(() => Math.random() - 0.5 )
-  setCartas(mazo)
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(c => {
+    if(c.classList.contains('flip')){
+      c.classList.remove('flip')
+    }
+  })
+  setTimeout(() => {
+    let mazo = personajes.sort(() => Math.random() - 0.5 )
+    setCartas(mazo)
+  },1000)
 }
 
 const handleClick = (target) => {
@@ -151,7 +159,7 @@ useEffect(() => {
         setTimeout(() => {
           targetUno.classList.remove('flip')
           targetDos.classList.remove('flip')
-        }, 3000)
+        }, 1500)
         
           }
   }
