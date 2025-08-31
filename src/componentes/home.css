@@ -1,0 +1,71 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;              /* toda la altura visible */
+  width: 100%;
+  border: 5px solid blueviolet;
+  border-radius: 1rem;
+}
+
+
+header {
+  display: flex;
+  justify-content: center;  
+  height: 50px;
+  width: 100%;
+  border-bottom: 5px solid blueviolet;
+
+}
+
+.section-header {
+  flex: 1;                      /* cada sección ocupa el mismo ancho */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.section-header:nth-child(1) {
+  border-right: 1px solid blueviolet;
+  color: yellow;
+}
+.section-header:nth-child(2) {
+  border-right: 1px solid blueviolet;
+}
+.section-header:nth-child(2) img {
+  width: 50%;
+}
+.nivel-puntos {
+  color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MAIN ocupa el resto */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;                       /* se expande para llenar el espacio */
+  border: 1px solid blueviolet;
+  background: black;
+  gap: 10px;
+}
+
+/* FOOTER abajo */
+footer {
+  width: 100%;
+  padding: .4rem;
+  border: 1px solid blueviolet;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-reset {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
