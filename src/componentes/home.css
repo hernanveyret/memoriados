@@ -7,7 +7,6 @@
   border-radius: 1rem;
 }
 
-
 header {
   display: flex;
   justify-content: center;  
@@ -68,4 +67,11 @@ footer {
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+
+.section-header:nth-child(2) img {
+  width: 100%;
+}
 }
