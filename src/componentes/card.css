@@ -10,15 +10,14 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.6s ease-in-out; /* Hace que gire lento/*
-  transform: rotateY(180deg); /* empieza girada */
+  transition: transform 0.6s ease-in-out;
+  transform: rotateY(180deg); /* 👈 ahora empieza girada */
 }
 
 
 .flip .contenedor-img {
   transform: rotateY(0);
 }
-
 /* Ambas caras */
 .front, .back {
   position: absolute;
@@ -26,7 +25,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  backface-visibility: hidden; /* oculta la cara de atrás */
+  backface-visibility: hidden; /* 🔑 oculta la cara de atrás */
   border: 3px solid yellow;
   border-radius: 10px;
   overflow: hidden;
