@@ -18,6 +18,7 @@ const [ letraDos, setLetraDos ] = useState(null)
 const [ targetUno, setTargetUno ] = useState(null)
 const [ targetDos, setTargetDos ] = useState(null)
 const [ aciertos, setAciertos ] = useState(0)
+const [ erradas, setErradas ] = useState(0);
 const [ acertadas, setAcertadas ] = useState([])
 const personajes = [
   {
@@ -172,6 +173,8 @@ const handleClick = (target) => {
 
 useEffect(() => {
   if(aciertos === 10){
+    let subTotal = 100 - (erradas * 100  ) / 100
+    setPuntos((prev) => prev + subTotal)
     setNivel((prev) => prev + 1)
     setIsConfeti(true);
     setLetraUno(null)
@@ -179,6 +182,8 @@ useEffect(() => {
           setAciertos(0)
           setTargetUno(null)
           setTargetDos(null)
+          setAcertadas([]);
+          setErradas(0)
     barajarCartas();
   }
 },[aciertos])
@@ -201,7 +206,7 @@ useEffect(() => {
           //console.log('No hay coincidencia')
           setLetraUno(null)
           setLetraDos(null)
-          
+          setErradas((prev) => prev + 1 )
           setTimeout(() => {
             targetUno.classList.remove('flip')
             targetDos.classList.remove('flip')
