@@ -23,6 +23,8 @@ header {
   justify-content: center;
   align-items: center;
   color: white;
+  font-family: 'MiFuentePersonalizada';
+  font-weight: 100;
 }
 .section-header:nth-child(1) {
   border-right: 1px solid blueviolet;

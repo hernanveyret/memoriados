@@ -32,5 +32,8 @@
   border-radius: 10px;
   box-shadow: 0 0 20px  blueviolet, inset 0 0 10px  blueviolet;
   cursor: pointer;
+  color: white;
+  font-family: 'MiFuentePersonalizada';
+  font-weight: 300;
 }
 

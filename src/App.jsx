@@ -198,6 +198,7 @@ useEffect(() => {
       }else{
         if( letraUno === letraDos ){
           //console.log('coincidencia');
+          sonidoAciertoCarta()
           setLetraUno(null)
           setLetraDos(null)
           setAciertos((prev) => prev + 1)
@@ -224,6 +225,12 @@ useEffect(() => {
 const  sonidoRepetirCarta = () => {
     const audio = new Audio();
     audio.src = "./audio/beeps.mp3";
+    audio.play();
+}
+
+const  sonidoAciertoCarta = () => {
+    const audio = new Audio();
+    audio.src = "./audio/acierto.wav";
     audio.play();
 }
 return (
