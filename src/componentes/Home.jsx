@@ -6,7 +6,10 @@ const Home = ({ barajarCartas,
                 handleClick, 
                 puntos, 
                 player, 
-                nivel }) => {
+                nivel,
+                letraUno,
+                letraDos
+              }) => {
 
   return (
     <div className="contenedor">
@@ -19,12 +22,12 @@ const Home = ({ barajarCartas,
         </section>
         <section className="section-header">
           <div className="nivel-puntos">
-            <p>NIVEL:</p>
+            <p>NIVEL: </p>
             <p>{nivel}</p>
           </div>
           <div className="nivel-puntos">
             <p>PUNTOS: </p>
-            <p>{puntos}</p>
+            <p> {puntos}</p>
           </div>
         </section>
       </header>
@@ -38,6 +41,8 @@ const Home = ({ barajarCartas,
                 letraId={c.id} 
                 handleClick={handleClick} 
                 indice={i}
+                letraUno={letraUno}
+                letraDos={letraDos}
                 />
               </div>
             ))

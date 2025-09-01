@@ -18,6 +18,7 @@ const [ letraDos, setLetraDos ] = useState(null)
 const [ targetUno, setTargetUno ] = useState(null)
 const [ targetDos, setTargetDos ] = useState(null)
 const [ aciertos, setAciertos ] = useState(0)
+const [ acertadas, setAcertadas ] = useState([])
 const personajes = [
   {
     id: 'c',
@@ -146,6 +147,14 @@ const barajarCartas = () => {
 
 const handleClick = (target) => {
   let letraId = target.dataset.id;
+  //console.log('letra id: ', letraId)
+  const filter = acertadas.some(e => e === letraId)
+  //console.log(filter)
+ if(filter){
+  sonidoRepetirCarta();
+  //console.log('ya jugaste esa carta');
+  return
+ }
   if(!letraUno){
     setLetraUno(letraId)
     setTargetUno(target)
@@ -162,12 +171,6 @@ const handleClick = (target) => {
 }
 
 useEffect(() => {
-  targetUno && console.log('id 1:',targetUno.id)
-  targetDos && console.log('id 2:',targetDos.id)
-}, [targetUno, targetDos])
-
-useEffect(() => {
-  console.log(aciertos)
   if(aciertos === 10){
     setNivel((prev) => prev + 1)
     setIsConfeti(true);
@@ -181,23 +184,21 @@ useEffect(() => {
 },[aciertos])
 
 useEffect(() => {
-  letraUno && console.log(letraUno);
-  letraDos && console.log(letraDos)
-
   if(letraUno && letraDos){
     if(targetUno && targetDos ){
       if(targetUno===targetDos){
-        console.log('hiciste click en la misma carta');
+        //console.log('hiciste click en la misma carta');
         sonidoRepetirCarta()
         return
       }else{
         if( letraUno === letraDos ){
-          console.log('coincidencia');
+          //console.log('coincidencia');
           setLetraUno(null)
           setLetraDos(null)
           setAciertos((prev) => prev + 1)
+          setAcertadas([...acertadas, letraUno])
           }else{
-          console.log('No hay coincidencia')
+          //console.log('No hay coincidencia')
           setLetraUno(null)
           setLetraDos(null)
           
@@ -238,6 +239,8 @@ return (
         puntos={puntos}
         player={player}
         nivel={nivel}
+        letraUno={letraUno}
+        letraDos={letraDos}
       />
       }
       {

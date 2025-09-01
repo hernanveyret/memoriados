@@ -1,11 +1,20 @@
 import React from 'react';
 import './card.css';
 
-const Card = ({ url, nombre, letraId, handleClick, indice }) => {
+const Card = ({ url, 
+                nombre, 
+                letraId, 
+                handleClick, 
+                indice,
+                letraUno,
+                letraDos
+              }) => {
   return (
     <div 
     type="button"
-    onClick={(e) => { handleClick(e.currentTarget)}}
+    onClick={(e) => { 
+      handleClick(e.currentTarget)
+    }}
     data-id={letraId}
     id={indice+letraId}
     className="card">
