@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 import './home.css'
-const Home = ({ barajarCartas, cartas, handleClick, puntos, player }) => {
+const Home = ({ barajarCartas, 
+                cartas, 
+                handleClick, 
+                puntos, 
+                player, 
+                nivel }) => {
 
   return (
     <div className="contenedor">
@@ -15,7 +20,7 @@ const Home = ({ barajarCartas, cartas, handleClick, puntos, player }) => {
         <section className="section-header">
           <div className="nivel-puntos">
             <p>NIVEL:</p>
-            <p>1</p>
+            <p>{nivel}</p>
           </div>
           <div className="nivel-puntos">
             <p>PUNTOS: </p>

@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react'
 import Home from './componentes/Home'
 import FormName from './componentes/FormName';
+import ExplosionConfeti from './componentes/ExplosionConfeti';
 import './App.css'
 
 function App() {
 const [ isHome, setIsHome ] = useState(false);
 const [ isFormName, setIsFormName ] = useState(true);
+const [ isConfeti, setIsConfeti ] = useState(false);
 
 const [ player, setPlayer ] = useState('')
 const [ cartas, setCartas ] = useState([])
 const [ puntos, setPuntos ] = useState(0)
+const [ nivel, setNivel ] = useState(1);
 const [ letraUno, setLetraUno ] = useState(null)
 const [ letraDos, setLetraDos ] = useState(null)
 const [ targetUno, setTargetUno ] = useState(null)
@@ -121,7 +124,6 @@ const personajes = [
 const startGame = (e) => {
   const nombre = e.target.nombre.value;
   setPlayer(nombre);
-  console.log('click')
   e.preventDefault()
   setIsFormName(false)
   setIsHome(true)
@@ -165,6 +167,20 @@ useEffect(() => {
 }, [targetUno, targetDos])
 
 useEffect(() => {
+  console.log(aciertos)
+  if(aciertos === 10){
+    setNivel((prev) => prev + 1)
+    setIsConfeti(true);
+    setLetraUno(null)
+          setLetraDos(null)
+          setAciertos(0)
+          setTargetUno(null)
+          setTargetDos(null)
+    barajarCartas();
+  }
+},[aciertos])
+
+useEffect(() => {
   letraUno && console.log(letraUno);
   letraDos && console.log(letraDos)
 
@@ -172,21 +188,26 @@ useEffect(() => {
     if(targetUno && targetDos ){
       if(targetUno===targetDos){
         console.log('hiciste click en la misma carta');
-        repetirCarta()
+        sonidoRepetirCarta()
         return
       }else{
         if( letraUno === letraDos ){
           console.log('coincidencia');
           setLetraUno(null)
           setLetraDos(null)
+          setAciertos((prev) => prev + 1)
           }else{
           console.log('No hay coincidencia')
           setLetraUno(null)
           setLetraDos(null)
+          
           setTimeout(() => {
             targetUno.classList.remove('flip')
             targetDos.classList.remove('flip')
-          }, 1500);        
+            
+          }, 1500);      
+          setTargetUno(null)
+          setTargetDos(null)  
         }
       }
     }
@@ -194,13 +215,14 @@ useEffect(() => {
   }
 },[letraUno, letraDos, targetUno, targetDos])
 
-const  repetirCarta = () => {
+const  sonidoRepetirCarta = () => {
     const audio = new Audio();
     audio.src = "./audio/beeps.mp3";
     audio.play();
 }
 return (
     <div className="conetendor-app">
+      
       {
         isFormName && 
         <FormName 
@@ -215,7 +237,14 @@ return (
         handleClick={handleClick}
         puntos={puntos}
         player={player}
+        nivel={nivel}
       />
+      }
+      {
+        isConfeti && 
+        <ExplosionConfeti
+        setIsConfeti={setIsConfeti}
+        />
       }
     </div>
   )
