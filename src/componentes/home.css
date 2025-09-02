@@ -29,6 +29,7 @@ header {
 .section-header:nth-child(1) {
   border-right: 1px solid blueviolet;
   color: yellow;
+  font-size: 1.5rem;
 }
 .section-header:nth-child(2) {
   border-right: 1px solid blueviolet;
