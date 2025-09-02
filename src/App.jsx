@@ -193,11 +193,7 @@ useEffect(() => {
     setTargetDos(null)
     setAcertadas([]);
     setErradas(0)
-    setIsLevel(true)
-    setTimeout(() => {
-      setIsLevel(false)
-      barajarCartas();
-    },3000)
+    //barajarCartas();
   }
 },[aciertos])
 
@@ -272,6 +268,8 @@ return (
         isConfeti && 
         <ExplosionConfeti
         setIsConfeti={setIsConfeti}
+        barajarCartas={barajarCartas}
+        setIsLevel={setIsLevel}
         />
       }
         {
