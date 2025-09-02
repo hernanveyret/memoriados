@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import Home from './componentes/Home'
 import FormName from './componentes/FormName';
 import ExplosionConfeti from './componentes/ExplosionConfeti';
+import Nivel from './componentes/Nivel';
 import './App.css'
 
 function App() {
 const [ isHome, setIsHome ] = useState(false);
 const [ isFormName, setIsFormName ] = useState(true);
 const [ isConfeti, setIsConfeti ] = useState(false);
+const [ isLevel, setIsLevel ] = useState(false);
 
 const [ player, setPlayer ] = useState('')
 const [ cartas, setCartas ] = useState([])
@@ -129,10 +131,17 @@ const startGame = (e) => {
   e.preventDefault()
   setIsFormName(false)
   setIsHome(true)
-  barajarCartas()
+  setIsLevel(true);
+  setTimeout(() => {
+    setIsLevel(false);
+    barajarCartas()
+  }, 3000);
+
 }
+
 // Baraja nuevamente las cartas y da vuelta las que estaban al revez
 const barajarCartas = () => {
+  
   const cards = document.querySelectorAll('.card');
   cards.forEach(c => {
     if(c.classList.contains('flip')){
@@ -178,13 +187,17 @@ useEffect(() => {
     setNivel((prev) => prev + 1)
     setIsConfeti(true);
     setLetraUno(null)
-          setLetraDos(null)
-          setAciertos(0)
-          setTargetUno(null)
-          setTargetDos(null)
-          setAcertadas([]);
-          setErradas(0)
-    barajarCartas();
+    setLetraDos(null)
+    setAciertos(0)
+    setTargetUno(null)
+    setTargetDos(null)
+    setAcertadas([]);
+    setErradas(0)
+    setIsLevel(true)
+    setTimeout(() => {
+      setIsLevel(false)
+      barajarCartas();
+    },3000)
   }
 },[aciertos])
 
@@ -235,7 +248,7 @@ const  sonidoAciertoCarta = () => {
 }
 return (
     <div className="conetendor-app">
-      
+     
       {
         isFormName && 
         <FormName 
@@ -261,6 +274,11 @@ return (
         setIsConfeti={setIsConfeti}
         />
       }
+        {
+        isLevel &&
+          <Nivel nivel={nivel}/>
+      }
+     
     </div>
   )
 }

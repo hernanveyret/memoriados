@@ -10,5 +10,9 @@ html {
 }
 @font-face {
   font-family: 'MiFuentePersonalizada';
-  src: url('./fonts/Playfull-Rocket.ttf') format('woff2')
+  src: url('./fonts/Rancho-Regular.ttf')
+}
+@font-face {
+  font-family: 'nivel';
+  src: url('./fonts/Comic-Jungle.ttf');
 }
