@@ -12,7 +12,3 @@ html {
   font-family: 'MiFuentePersonalizada';
   src: url('./fonts/Rancho-Regular.ttf')
 }
-@font-face {
-  font-family: 'nivel';
-  src: url('./fonts/Comic-Jungle.ttf');
-}

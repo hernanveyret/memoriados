@@ -1,4 +1,8 @@
 
+@font-face {
+  font-family: 'nivel';
+  src: url('./fonts/Comic-Jungle.ttf');
+}
 .contenedor-nivel {
   width: 100%;
   height: 100dvh;
@@ -6,18 +10,24 @@
   top: 0;
   left: 0;
   font-size: 2rem;
-  font-family: 'nivel','Courier New', Courier, monospace;
+  font-family: 'nivel';
   color: yellow;
   letter-spacing: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeOut 3s forwards; 
+  /*animation: fadeOut 3s forwards; */
   text-shadow: 5px 5px 4px fuchsia;
   
 }
 
-
+.box {
+  border: 2px solid blueviolet;
+  padding: 2rem;
+  background-color: blueviolet;
+  border-radius: 10px;
+  box-shadow: 5px 5px 4px fuchsia;
+}
 @keyframes fadeOut {
   0% {
     opacity: 1;   /* Comienza visible */
