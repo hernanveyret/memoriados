@@ -3,16 +3,20 @@ import Home from './componentes/Home'
 import FormName from './componentes/FormName';
 import ExplosionConfeti from './componentes/ExplosionConfeti';
 import Nivel from './componentes/Nivel';
+import SeleccionPersonajes from './componentes/SeleccionPersonajes';
 import './App.css'
 
 function App() {
 const [ isHome, setIsHome ] = useState(false);
-const [ isFormName, setIsFormName ] = useState(true);
+const [ isFormName, setIsFormName ] = useState(false);
 const [ isConfeti, setIsConfeti ] = useState(false);
 const [ isLevel, setIsLevel ] = useState(false);
+const [ isSelectPersonaje, setIsSelectPersonaje ] = useState(true);
+const [ isTuSeleccion, setIsTuSeleccion ] = useState(null);
 
 const [ player, setPlayer ] = useState('')
 const [ cartas, setCartas ] = useState([])
+const [ personajeSeleccionado, setPersonajeSeleccionado ] = useState([]);
 const [ puntos, setPuntos ] = useState(0)
 const [ nivel, setNivel ] = useState(1);
 const [ letraUno, setLetraUno ] = useState(null)
@@ -124,6 +128,89 @@ const personajes = [
     url: './img/cartas/camilo1.jpg'
   }
 ];
+const personajesBM = [
+  { id: 'a', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm01.jpg' 
+  },
+  { id: 'f', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm06.jpg' 
+  },
+  { id: 'j', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm10.jpg' 
+  },
+  { id: 'c', nombre: 
+    'Blippi y Meeka',
+     url: './img/cartas/bm03.jpg' 
+    },
+  { id: 'h', 
+    nombre: 'Blippi y Meeka',
+     url: './img/cartas/bm08.jpg' 
+    },
+  { id: 'e', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm05.jpg' 
+  },
+  { id: 'g', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm07.jpg' 
+  },
+  { id: 'b', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm02.jpg' 
+  },
+  { id: 'd', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm04.jpg' 
+  },
+  { id: 'i', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm09.jpg' 
+  },
+
+  { id: 'c', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm03.jpg' 
+  },
+  { id: 'b', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm02.jpg' 
+  },
+  { id: 'e', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm05.jpg' 
+  },
+  { id: 'a', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm01.jpg' 
+  },
+  { id: 'h', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm08.jpg' 
+  },
+  { id: 'g', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm07.jpg' 
+  },
+  { id: 'i', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm09.jpg' 
+  },
+  { id: 'd', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm04.jpg' 
+  },
+  { id: 'f', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm06.jpg' 
+  },
+  { id: 'j', 
+    nombre: 'Blippi y Meeka', 
+    url: './img/cartas/bm10.jpg' 
+  },
+];
 
 const startGame = (e) => {
   const nombre = e.target.nombre.value;
@@ -135,13 +222,22 @@ const startGame = (e) => {
   setTimeout(() => {
     setIsLevel(false);
     barajarCartas()
-  }, 3000);
-
+  }, 3000); 
+ 
 }
 
+useEffect(() => {
+  if(isTuSeleccion === false ){
+    
+    setPersonajeSeleccionado(personajesBM)
+  }else{
+    
+    setPersonajeSeleccionado(personajes)
+  }
+},[isTuSeleccion])
+
 // Baraja nuevamente las cartas y da vuelta las que estaban al revez
-const barajarCartas = () => {
-  
+const barajarCartas = () => {  
   const cards = document.querySelectorAll('.card');
   cards.forEach(c => {
     if(c.classList.contains('flip')){
@@ -149,7 +245,7 @@ const barajarCartas = () => {
     }
   })
   setTimeout(() => {
-    let mazo = personajes.sort(() => Math.random() - 0.5 )
+    let mazo = personajeSeleccionado.sort(() => Math.random() - 0.5 )
     setCartas(mazo)
   },1000)
 };
@@ -244,7 +340,14 @@ const  sonidoAciertoCarta = () => {
 }
 return (
     <div className="conetendor-app">
-     
+      { 
+        isSelectPersonaje &&
+        <SeleccionPersonajes 
+        setIsSelectPersonaje={setIsSelectPersonaje}
+        setIsFormName={setIsFormName}
+        setIsTuSeleccion={setIsTuSeleccion}
+        />
+      }
       {
         isFormName && 
         <FormName 
