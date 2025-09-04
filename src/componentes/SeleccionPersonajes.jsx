@@ -1,5 +1,5 @@
 import React from 'react';
-import './SeleccionPersonajes.css';
+import './seleccionPersonajes.css';
 const SeleccionPersonajes = ({setIsSelectPersonaje, setIsFormName, setIsTuSeleccion}) => {
   return (
     <div className='contenedor-seleccion-personajes'>
