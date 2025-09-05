@@ -212,6 +212,17 @@ const personajesBM = [
   },
 ];
 
+const startNuevoJuego = () => {
+  setIsHome(false)
+  setIsFormName(false)
+  setIsConfeti(false)
+  setIsLevel(false)
+  setIsTuSeleccion(false)
+  setIsSelectPersonaje(true)
+  setPuntos(0)
+  setNivel(1)
+}
+
 const startGame = (e) => {
   const nombre = e.target.nombre.value;
   setPlayer(nombre);
@@ -365,6 +376,7 @@ return (
         nivel={nivel}
         letraUno={letraUno}
         letraDos={letraDos}
+        startNuevoJuego={startNuevoJuego}
       />
       }
       {

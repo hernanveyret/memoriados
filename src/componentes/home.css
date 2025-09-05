@@ -51,7 +51,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  flex: 1;                       /* se expande para llenar el espacio */
+  flex: 1;                       
   border: 1px solid blueviolet;
   background: black;
   gap: 10px;
@@ -65,12 +65,17 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .btn-reset {
+  color: yellow;
   background: transparent;
   border: none;
   cursor: pointer;
+}
+.btn-reset:hover {
+  color:fuchsia;
 }
 
 @media (max-width: 480px) {
