@@ -7,6 +7,10 @@ import SeleccionPersonajes from './componentes/SeleccionPersonajes';
 import './App.css'
 
 function App() {
+
+const infoGuardada = localStorage.getItem('memoriados');
+const [ infoJugadores, setInfoJugadores ] = useState(infoGuardada ? JSON.parse(infoGuardada) : [] );
+const [ isJugador, setIsJugador ] = useState({})
 const [ isHome, setIsHome ] = useState(false);
 const [ isFormName, setIsFormName ] = useState(false);
 const [ isConfeti, setIsConfeti ] = useState(false);
@@ -212,6 +216,7 @@ const personajesBM = [
   },
 ];
 
+
 const startNuevoJuego = () => {
   setIsHome(false)
   setIsFormName(false)
@@ -225,8 +230,31 @@ const startNuevoJuego = () => {
 
 const startGame = (e) => {
   const nombre = e.target.nombre.value;
-  setPlayer(nombre);
+  setPlayer(nombre[0].toUpperCase()+nombre.slice(1));
   e.preventDefault()
+
+  if(nombre){
+    let filtro = infoJugadores.find(e => e.nombre === nombre[0].toUpperCase()+nombre.slice(1))
+    if(filtro){
+      console.log(filtro)
+      console.log('encontro el nombre en localesStorage')
+      setIsJugador(filtro)
+      setPlayer(filtro.nombre)
+      setNivel(filtro.nivel)
+      setPuntos(filtro.puntos)
+    }else{
+      console.log('no encontro el nombre asi que lo crea')
+      const newPlayer = {
+      id: Date.now(),
+      nombre: nombre[0].toUpperCase()+nombre.slice(1),
+      puntos: 0,
+      nivel: 1
+    }
+    setIsJugador(newPlayer)
+    setInfoJugadores([...infoJugadores, newPlayer])
+    
+    }    
+  }
   setIsFormName(false)
   setIsHome(true)
   setIsLevel(true);
@@ -234,8 +262,32 @@ const startGame = (e) => {
     setIsLevel(false);
     barajarCartas()
   }, 3000); 
- 
 }
+
+useEffect(() => {
+  localStorage.setItem('memoriados',JSON.stringify(infoJugadores));
+},[infoJugadores])
+
+useEffect(() => {
+  console.log('Jugador: ',isJugador)
+  
+  if(isJugador.nombre){
+    console.log(isJugador.nombre)
+    const nuevosPuntos = {
+    id: isJugador.id,
+    nombre: isJugador.nombre,
+    puntos: puntos,
+    nivel: nivel
+  }
+  console.log('Nuevos Puntaje: ',nuevosPuntos)
+  const filtro = infoJugadores.filter(players => players.nombre !== nuevosPuntos.nombre);
+  console.log(filtro)
+  filtro.push(nuevosPuntos)
+  setInfoJugadores(filtro)
+  console.log(filtro)
+  }  
+},[puntos])
+
 
 useEffect(() => {
   if(isTuSeleccion === false ){
