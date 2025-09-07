@@ -407,7 +407,7 @@ const  sonidoAciertoCarta = () => {
 }
 return (
     <div className="conetendor-app">
-       
+       <InstallPrompt />
       { 
         isSelectPersonaje &&
         <SeleccionPersonajes 

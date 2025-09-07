@@ -12,6 +12,7 @@ const InstallPrompt = () => {
     if (!isMobile()) return;
 
     const handleBeforeInstallPrompt = (e) => {
+      console.log('beforeinstallprompt fired', e); // <--- esto sirve para ver si se dispara
       e.preventDefault();
       setDeferredPrompt(e);
       setShowPrompt(true);
