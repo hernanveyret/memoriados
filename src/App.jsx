@@ -4,6 +4,7 @@ import FormName from './componentes/FormName';
 import ExplosionConfeti from './componentes/ExplosionConfeti';
 import Nivel from './componentes/Nivel';
 import SeleccionPersonajes from './componentes/SeleccionPersonajes';
+import InstallPrompt from './componentes/InstallPrompt';
 import './App.css'
 
 function App() {
@@ -216,7 +217,6 @@ const personajesBM = [
   },
 ];
 
-
 const startNuevoJuego = () => {
   setIsHome(false)
   setIsFormName(false)
@@ -277,9 +277,7 @@ useEffect(() => {
   localStorage.setItem('memoriados',JSON.stringify(infoJugadores));
 },[infoJugadores])
 
-useEffect(() => {
-  console.log('Jugador: ',isJugador)
-  
+useEffect(() => {  
   if(isJugador.nombre){
     console.log(isJugador.nombre)
     const nuevosPuntos = {
@@ -296,7 +294,6 @@ useEffect(() => {
   console.log(filtro)
   }  
 },[puntos])
-
 
 useEffect(() => {
   if(isTuSeleccion === false ){    
@@ -410,6 +407,7 @@ const  sonidoAciertoCarta = () => {
 }
 return (
     <div className="conetendor-app">
+       <InstallPrompt />
       { 
         isSelectPersonaje &&
         <SeleccionPersonajes 
