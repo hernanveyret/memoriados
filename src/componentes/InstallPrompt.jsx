@@ -26,6 +26,7 @@ const InstallPrompt = () => {
   }, []);
 
   const handleInstall = async () => {
+    console.log('click en si')
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
