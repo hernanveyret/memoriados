@@ -236,14 +236,11 @@ const startGame = (e) => {
   if(nombre){
     let filtro = infoJugadores.find(e => e.nombre === nombre[0].toUpperCase()+nombre.slice(1))
     if(filtro){
-      console.log(filtro)
-      console.log('encontro el nombre en localesStorage')
       setIsJugador(filtro)
       setPlayer(filtro.nombre)
       setNivel(filtro.nivel)
       setPuntos(filtro.puntos)
     }else{
-      console.log('no encontro el nombre asi que lo crea')
       const newPlayer = {
       id: Date.now(),
       nombre: nombre[0].toUpperCase()+nombre.slice(1),
@@ -279,19 +276,15 @@ useEffect(() => {
 
 useEffect(() => {  
   if(isJugador.nombre){
-    console.log(isJugador.nombre)
     const nuevosPuntos = {
     id: isJugador.id,
     nombre: isJugador.nombre,
     puntos: puntos,
     nivel: nivel
   }
-  console.log('Nuevos Puntaje: ',nuevosPuntos)
   const filtro = infoJugadores.filter(players => players.nombre !== nuevosPuntos.nombre);
-  console.log(filtro)
   filtro.push(nuevosPuntos)
   setInfoJugadores(filtro)
-  console.log(filtro)
   }  
 },[puntos])
 
