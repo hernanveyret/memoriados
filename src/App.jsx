@@ -230,7 +230,7 @@ const startNuevoJuego = () => {
 
 const startGame = (e) => {
   const nombre = e.target.nombre.value;
-  setPlayer(nombre[0].toUpperCase()+nombre.slice(1));
+  setPlayer(nombre ? nombre[0].toUpperCase()+nombre.slice(1) : 'Jugador');
   e.preventDefault()
 
   if(nombre){
@@ -254,7 +254,7 @@ const startGame = (e) => {
     setInfoJugadores([...infoJugadores, newPlayer])
     
     }    
-  }
+  
   setIsFormName(false)
   setIsHome(true)
   setIsLevel(true);
@@ -262,6 +262,15 @@ const startGame = (e) => {
     setIsLevel(false);
     barajarCartas()
   }, 3000); 
+}else{
+  setIsFormName(false)
+  setIsHome(true)
+  setIsLevel(true);
+  setTimeout(() => {
+    setIsLevel(false);
+    barajarCartas()
+  }, 3000); 
+}
 }
 
 useEffect(() => {
@@ -290,11 +299,9 @@ useEffect(() => {
 
 
 useEffect(() => {
-  if(isTuSeleccion === false ){
-    
+  if(isTuSeleccion === false ){    
     setPersonajeSeleccionado(personajesBM)
-  }else{
-    
+  }else{    
     setPersonajeSeleccionado(personajes)
   }
 },[isTuSeleccion])
@@ -448,4 +455,4 @@ return (
   )
 }
 
-export default App
+export default App;
