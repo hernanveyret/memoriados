@@ -50,7 +50,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
   flex: 1;                       
   border: 1px solid blueviolet;
   background: black;

@@ -14,7 +14,6 @@
   transform: rotateY(180deg); /* 👈 ahora empieza girada */
 }
 
-
 .flip .contenedor-img {
   transform: rotateY(0);
 }

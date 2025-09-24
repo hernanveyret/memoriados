@@ -31,6 +31,7 @@ const [ targetDos, setTargetDos ] = useState(null)
 const [ aciertos, setAciertos ] = useState(0)
 const [ erradas, setErradas ] = useState(0);
 const [ acertadas, setAcertadas ] = useState([])
+
 const personajes = [
   {
     id: 'c',
@@ -217,6 +218,30 @@ const personajesBM = [
   },
 ];
 
+const personajesHun = [
+  { id: 'a', nombre: 'huntrix', url: './img/cartas/hun1.jpg' },
+  { id: 'f', nombre: 'huntrix', url: './img/cartas/hun6.jpg' },
+  { id: 'j', nombre: 'huntrix', url: './img/cartas/hun10.jpg' },
+  { id: 'c', nombre: 'huntrix', url: './img/cartas/hun3.jpg' },
+  { id: 'h', nombre: 'huntrix', url: './img/cartas/hun8.jpg' },
+  { id: 'e', nombre: 'huntrix', url: './img/cartas/hun5.jpg' },
+  { id: 'g', nombre: 'huntrix', url: './img/cartas/hun7.jpg' },
+  { id: 'b', nombre: 'huntrix', url: './img/cartas/hun2.jpg' },
+  { id: 'd', nombre: 'huntrix', url: './img/cartas/hun4.jpg' },
+  { id: 'i', nombre: 'huntrix', url: './img/cartas/hun9.jpg' },
+
+  { id: 'c', nombre: 'huntrix', url: './img/cartas/hun3.jpg' },
+  { id: 'b', nombre: 'huntrix', url: './img/cartas/hun2.jpg' },
+  { id: 'e', nombre: 'huntrix', url: './img/cartas/hun5.jpg' },
+  { id: 'a', nombre: 'huntrix', url: './img/cartas/hun1.jpg' },
+  { id: 'h', nombre: 'huntrix', url: './img/cartas/hun8.jpg' },
+  { id: 'g', nombre: 'huntrix', url: './img/cartas/hun7.jpg' },
+  { id: 'i', nombre: 'huntrix', url: './img/cartas/hun9.jpg' },
+  { id: 'd', nombre: 'huntrix', url: './img/cartas/hun4.jpg' },
+  { id: 'f', nombre: 'huntrix', url: './img/cartas/hun6.jpg' },
+  { id: 'j', nombre: 'huntrix', url: './img/cartas/hun10.jpg' }
+];
+
 const startNuevoJuego = () => {
   setIsHome(false)
   setIsFormName(false)
@@ -291,8 +316,10 @@ useEffect(() => {
 useEffect(() => {
   if(isTuSeleccion === false ){    
     setPersonajeSeleccionado(personajesBM)
-  }else{    
+  }else if( isTuSeleccion === true ){    
     setPersonajeSeleccionado(personajes)
+  }else{
+    setPersonajeSeleccionado(personajesHun)
   }
 },[isTuSeleccion])
 

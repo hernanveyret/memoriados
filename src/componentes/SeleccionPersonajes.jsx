@@ -22,7 +22,16 @@ const SeleccionPersonajes = ({setIsSelectPersonaje, setIsFormName, setIsTuSelecc
           }}
       >
         <img src='./img/cartas/bm03.jpg' alt='Blippi y Meeka' />
-      </div>        
+      </div> 
+      <div className="card-dos" 
+        onClick={() => {
+            setIsSelectPersonaje(false)
+            setIsFormName(true);
+            setIsTuSeleccion(null)
+          }}
+      >
+        <img src='./img/cartas/hun1.jpg' alt='Huntrix' />
+      </div>       
       </section>
       
     </div>
