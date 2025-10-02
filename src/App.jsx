@@ -337,7 +337,6 @@ const barajarCartas = () => {
   },1000)
 };
 
-
 const handleClick = (target) => {
   let letraId = target.dataset.id;
   //console.log('letra id: ', letraId)
@@ -354,7 +353,6 @@ const handleClick = (target) => {
   }else{
     setLetraDos(letraId);
     setTargetDos(target)
-  
   }
   
   //console.log(letraId)
@@ -397,6 +395,7 @@ useEffect(() => {
           setAcertadas([...acertadas, letraUno])
           }else{
           //console.log('No hay coincidencia')
+          sonidoOhoh()
           setLetraUno(null)
           setLetraDos(null)
           setErradas((prev) => prev + 1 )
@@ -408,6 +407,7 @@ useEffect(() => {
           setTargetUno(null)
           setTargetDos(null)  
         }
+        
       }
     }
       
@@ -417,6 +417,12 @@ useEffect(() => {
 const  sonidoRepetirCarta = () => {
     const audio = new Audio();
     audio.src = "./audio/beeps.mp3";
+    audio.play();
+}
+
+const sonidoOhoh = () => {
+  const audio = new Audio();
+    audio.src = "./audio/ohoh.mp3";
     audio.play();
 }
 
