@@ -66,6 +66,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 .btn-reset {
@@ -77,10 +78,21 @@ footer {
 .btn-reset:hover {
   color:fuchsia;
 }
-
+.btn-dino {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 20px;
+}
+.btn-dino img {
+  width: 100%;
+}
 @media (max-width: 480px) {
 
 .section-header:nth-child(2) img {
   width: 100%;
+}
+.contenedor {
+  height: 10px;
 }
 }

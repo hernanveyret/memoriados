@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { getData } from '../firebase/auth.js';
 import Card from './Card';
+import Level from './Level';
 import './home.css'
 const Home = ({ barajarCartas, 
                 cartas, 
@@ -12,8 +14,48 @@ const Home = ({ barajarCartas,
                 startNuevoJuego
               }) => {
 
+  const [ dino, setDino ] = useState(0)
+  const [ start, setStart ] = useState(false)
+  const [chat, setChat] = useState([]);
+  
+  useEffect(() => {
+    // Llamamos a getData y guardamos la función para dejar de escuchar luego
+    const unsubscribe =  getData((data) => {
+      setChat(data); // actualiza el estado cada vez que cambien los datos
+    });
+
+    // Cleanup: dejar de escuchar cuando el componente se desmonte
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Si llega a 5, mostrar componente y reiniciar
+    if (dino === 5) {
+      setStart(true);
+      setDino(0);
+      return;
+    }
+
+    // Si dino es distinto de 0, arrancamos el temporizador
+    if (dino > 0) {
+      const timer = setTimeout(() => {
+        setDino(0);
+      }, 4000);
+
+      // limpiar timeout si dino cambia antes de que pasen los 5s
+      return () => clearTimeout(timer);
+    }
+  }, [dino]);
+
   return (
     <div className="contenedor">
+      {
+        start &&
+          <Level 
+            setStart={setStart}
+            chat={chat}
+          />
+      }
       <header>
         <section className="section-header">
           <p>{player ? player[0].toUpperCase() + player.slice(1) : 'Jugador'}</p>
@@ -68,6 +110,12 @@ const Home = ({ barajarCartas,
           className='btn-reset'
         >
           JUEGO NUEVO
+        </button>
+        <button
+          className="btn-dino"
+          onClick={(() => { setDino((prev) => prev + 1)})}
+        >
+          <img src='/public/img/dino.png' alt="logo web" />
         </button>
       </footer>
     </div>
