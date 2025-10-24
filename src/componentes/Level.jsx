@@ -53,7 +53,7 @@ const Level = ({ setStart, chat }) => {
 
     sendMessage({
       id: mensajesPrevios.length,
-      user: "papa",
+      user: "abi",
       msj: valorInput,
       dia,
       hora
